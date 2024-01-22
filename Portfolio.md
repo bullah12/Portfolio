@@ -37,3 +37,7 @@
 - Created dynamic Power BI reports with interactive visuals.
 - Centralized pipeline using Azure Data Factory for automation.
 
+## Python Libraries I have used
+**Graphs**
+- Matplotlib
+- Bokeh
