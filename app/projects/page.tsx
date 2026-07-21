@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProjectLibrary } from "../../components/ProjectLibrary";
 import { projects } from "../../lib/content";
 
+export const dynamic = "force-static";
 export const metadata: Metadata = { title: "Projects", description: "A filterable library of Abdullah Taj’s data, web, mobile, mapping, game and commerce builds." };
 
 export default function ProjectsPage() {

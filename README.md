@@ -18,9 +18,11 @@ npm run format:check
 npm run lint
 npm run typecheck
 npm test
+npm run build
 ```
 
-`npm test` creates the production build before running rendered-output tests.
+`npm run build` creates the standard `.next` output expected by Vercel. The
+Cloudflare/Sites-compatible build remains available as `npm run build:sites`.
 
 ## Content model
 
@@ -43,7 +45,9 @@ Abstract covers are generated from project metadata and CSS when real media is a
 
 ## Deployment and configuration
 
-The project retains the Sites-compatible vinext and Cloudflare Worker build. It can also be adapted for a conventional Next.js host.
+Vercel uses the standard Next.js build through `vercel.json`. The repository also
+retains the Sites-compatible vinext and Cloudflare Worker build through the
+`:sites` scripts.
 
 Before using a custom domain, edit `content/profile.ts`:
 

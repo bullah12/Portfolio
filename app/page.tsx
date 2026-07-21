@@ -5,6 +5,8 @@ import { ExperienceTimeline } from "../components/ExperienceTimeline";
 import { ProjectLibrary } from "../components/ProjectLibrary";
 import { featuredProjects, projects, experiences, profile } from "../lib/content";
 
+export const dynamic = "force-static";
+
 const capabilities = [
   {
     number: "01",

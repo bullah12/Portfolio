@@ -6,6 +6,7 @@ import { AbstractCover } from "../../../components/AbstractCover";
 import { RichBody } from "../../../components/RichBody";
 import { getProject, getRelatedProjects, projects } from "../../../lib/content";
 
+export const dynamic = "force-static";
 export function generateStaticParams() { return projects.map((project) => ({ slug: project.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
