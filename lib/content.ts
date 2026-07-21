@@ -32,6 +32,7 @@ export type Project = {
   year: number;
   status: ProjectStatus;
   visibility: "public" | "private";
+  portfolio?: boolean;
   featuredRank?: number;
   sortOrder?: number;
   summary: string;
@@ -139,6 +140,15 @@ function optionalNumber(data: Record<string, unknown>, key: string, file: string
   return value;
 }
 
+function optionalBoolean(data: Record<string, unknown>, key: string, file: string) {
+  const value = data[key];
+  if (value === undefined) return undefined;
+  if (typeof value !== "boolean") {
+    throw new Error(`[content] ${file}: optional field "${key}" must be true or false.`);
+  }
+  return value;
+}
+
 function validateUrl(value: string | null | undefined, key: string, file: string) {
   if (!value) return value;
   try {
@@ -198,6 +208,7 @@ function validateProject(raw: string, file: string): Project {
     year,
     status: status as ProjectStatus,
     visibility,
+    portfolio: optionalBoolean(data, "portfolio", file),
     featuredRank: optionalNumber(data, "featuredRank", file),
     sortOrder: optionalNumber(data, "sortOrder", file),
     summary: assertString(data, "summary", file),
@@ -257,6 +268,7 @@ function validateExperience(raw: string, file: string): Experience {
 
 export const projects = Object.entries(projectFiles)
   .map(([file, raw]) => validateProject(raw, file))
+  .filter((project) => project.portfolio !== false)
   .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999) || b.year - a.year);
 
 export const experiences = Object.entries(experienceFiles)

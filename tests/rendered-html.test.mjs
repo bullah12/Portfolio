@@ -17,6 +17,8 @@ function frontmatter(source) {
       const key = line.slice(0, separator).trim();
       const raw = line.slice(separator + 1).trim();
       if (raw === "null") return [key, null];
+      if (raw === "true") return [key, true];
+      if (raw === "false") return [key, false];
       if (/^\d+$/.test(raw)) return [key, Number(raw)];
       if (raw.startsWith("[") || raw.startsWith('"')) return [key, JSON.parse(raw)];
       return [key, raw];
@@ -79,6 +81,26 @@ test("discovers the complete project library and required frontmatter", async ()
       if (data[field]) assert.doesNotThrow(() => new URL(data[field]));
     }
   }
+});
+
+test("publishes only the requested projects in the requested order", async () => {
+  const directory = new URL("../content/projects/", import.meta.url);
+  const files = (await readdir(directory)).filter((file) => file.endsWith(".mdx"));
+  const visible = [];
+  for (const file of files) {
+    const data = frontmatter(await readFile(new URL(file, directory), "utf8"));
+    if (data.portfolio !== false) visible.push(data);
+  }
+  visible.sort((a, b) => a.sortOrder - b.sortOrder);
+  assert.deepEqual(visible.map((project) => project.slug), [
+    "world-cup-fantasy",
+    "property-management-dashboard",
+    "ascent-ledger",
+    "wholesale-traders",
+    "hr-portal",
+    "london-property-deal-finder",
+    "openguessr",
+  ]);
 });
 
 test("removes starter preview code and dead-link placeholders", async () => {
