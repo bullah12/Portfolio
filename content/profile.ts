@@ -4,7 +4,7 @@ export const profile = {
   supportingRole: "Senior Consultant",
   location: "United Kingdom",
   email: "hello@abdullah-taj.dev" as string | null,
-  availability: "Available for senior data roles" as string | null,
+  availability: "Available for senior data enquiries" as string | null,
   github: "https://github.com/bullah12",
   linkedin: null as string | null,
   siteUrl: null as string | null,
