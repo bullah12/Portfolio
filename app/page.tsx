@@ -80,6 +80,28 @@ export default function Home() {
           </div>
         </div>
 
+        <section className="graph-cta section-shell" aria-labelledby="graph-cta-title">
+          <div className="graph-cta-card">
+            <div className="graph-cta-copy">
+              <p className="eyebrow">{"// interactive knowledge graph"}</p>
+              <h2 id="graph-cta-title">See how the stack connects to <em>delivered work.</em></h2>
+              <p>Trace technologies through anonymised sectors to the production systems, quality standards and data products they enabled.</p>
+              <Link className="button button-primary" href="/explore">$ explore the graph →</Link>
+            </div>
+            <div className="graph-cta-visual" aria-hidden="true">
+              <span className="graph-map-status">relationship_map.live</span>
+              <div className="graph-map-layer graph-map-technologies">
+                <span>DBX</span><span>Δ</span><span>dbt</span><span>ML</span>
+              </div>
+              <i className="graph-map-link graph-map-link-solid" />
+              <div className="graph-map-layer graph-map-sector"><span>sector</span></div>
+              <i className="graph-map-link graph-map-link-dashed" />
+              <div className="graph-map-layer graph-map-work"><span>01</span><span>02</span><span>03</span></div>
+              <div className="graph-map-key"><span>technology</span><span>anonymised sector</span><span>delivered work</span></div>
+            </div>
+          </div>
+        </section>
+
         <section className="work-section section-shell" id="work" aria-labelledby="work-title">
           <div className="terminal-heading">
             <p className="eyebrow" id="work-title">{"// production data engineering"}</p>

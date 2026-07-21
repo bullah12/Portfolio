@@ -54,6 +54,8 @@ test("server-renders the finished portfolio", async () => {
   assert.match(html, /I build the data platforms that/);
   assert.match(html, /Fantasy World Cup 2026/);
   assert.match(html, /production data engineering/);
+  assert.match(html, /See how the stack connects to/);
+  assert.match(html, /href=["']\/explore["'][^>]*>\$ explore the graph/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
   assert.doesNotMatch(html, /href=["']#["']/i);
 });

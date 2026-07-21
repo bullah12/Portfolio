@@ -93,6 +93,32 @@ h1, h2, h3, p { text-wrap: pretty; }
 .tech-ticker b { color: var(--signal); font-size: 1rem; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 
+.graph-cta { padding-top: clamp(3.5rem, 7vw, 5.5rem); }
+.graph-cta-card { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; overflow: hidden; padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid var(--line-strong); border-radius: 14px; background: var(--surface); }
+.graph-cta-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 2rem 2rem; mask-image: linear-gradient(90deg, transparent 25%, black 100%); opacity: .45; }
+.graph-cta-copy { position: relative; z-index: 2; }
+.graph-cta-copy h2 { max-width: 38rem; margin: 1rem 0 1.1rem; color: var(--heading); font-size: clamp(2rem, 4vw, 3.15rem); letter-spacing: -.04em; line-height: 1.02; }
+.graph-cta-copy h2 em { color: var(--signal); font-style: normal; }
+.graph-cta-copy > p:not(.eyebrow) { max-width: 37rem; margin: 0; color: var(--muted); font-size: .9rem; }
+.graph-cta-copy .button { margin-top: 1.65rem; }
+.graph-cta-visual { position: relative; z-index: 2; display: grid; min-height: 23rem; place-items: center; align-content: center; padding: 2.7rem 1.5rem 1.5rem; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--bg) 88%, transparent); }
+.graph-map-status { position: absolute; top: .8rem; left: .9rem; display: flex; align-items: center; gap: .45rem; color: var(--green); font-family: var(--mono); font-size: .56rem; }
+.graph-map-status::before { content: ""; width: .38rem; height: .38rem; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+.graph-map-layer { display: flex; align-items: center; justify-content: center; }
+.graph-map-layer span { display: grid; place-items: center; border-radius: 50%; font-family: var(--mono); font-weight: 800; }
+.graph-map-technologies { gap: clamp(.5rem, 1.5vw, 1rem); }
+.graph-map-technologies span { width: clamp(2.75rem, 5vw, 3.55rem); height: clamp(2.75rem, 5vw, 3.55rem); border: 2px solid var(--signal); color: var(--signal); background: var(--signal-soft); font-size: .63rem; }
+.graph-map-sector span { width: 6.5rem; height: 6.5rem; border: 2px solid var(--green); color: var(--green); background: color-mix(in srgb, var(--surface-raised) 88%, var(--green) 12%); font-size: .68rem; text-transform: uppercase; }
+.graph-map-work { gap: .65rem; }
+.graph-map-work span { width: 2.8rem; height: 2.8rem; border: 1px solid var(--line-strong); color: var(--muted); background: var(--surface-raised); font-size: .62rem; }
+.graph-map-link { display: block; height: 2rem; border-left: 2px solid var(--signal); }
+.graph-map-link-dashed { border-color: var(--green); border-left-style: dashed; }
+.graph-map-key { display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem 1rem; margin-top: 1.3rem; color: var(--dim); font-family: var(--mono); font-size: .5rem; text-transform: uppercase; }
+.graph-map-key span { display: inline-flex; align-items: center; gap: .35rem; }
+.graph-map-key span::before { content: ""; width: .36rem; height: .36rem; border-radius: 50%; border: 1px solid var(--line-strong); }
+.graph-map-key span:first-child::before { border-color: var(--signal); }
+.graph-map-key span:nth-child(2)::before { border-color: var(--green); }
+
 .work-section, .featured, .capabilities, .about { padding-top: clamp(4.75rem, 9vw, 7.25rem); padding-bottom: 1.5rem; scroll-margin-top: 4.6rem; }
 .terminal-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; margin-bottom: 1.5rem; }
 .terminal-heading > span, .terminal-heading > a { color: var(--dim); font-family: var(--mono); font-size: .7rem; }
@@ -349,6 +375,8 @@ h1, h2, h3, p { text-wrap: pretty; }
   .project-row { grid-template-columns: 2rem minmax(0, 1fr); }
   .project-categories { grid-column: 2; justify-content: flex-start; max-width: none; }
   .case-details { grid-template-columns: 1fr; gap: 2rem; }
+  .graph-cta-card { grid-template-columns: 1fr; }
+  .graph-cta-visual { min-height: 20rem; }
   .explore-intro { grid-template-columns: 1fr; gap: 2rem; }
   .explore-intro-copy { max-width: 42rem; }
   .graph-heading { align-items: flex-start; flex-direction: column; }
@@ -389,6 +417,9 @@ h1, h2, h3, p { text-wrap: pretty; }
   .related-grid { grid-template-columns: 1fr; }
   .next-project { grid-template-columns: 1fr auto; gap: .4rem 1rem; }
   .next-project span { grid-column: 1 / -1; }
+  .graph-cta-card { padding: 1.35rem; }
+  .graph-cta-copy .button { width: 100%; }
+  .graph-cta-visual { min-height: 18rem; padding-inline: .75rem; }
   .explore-intro { padding-top: 3.5rem; }
   .explore-intro h1 { font-size: clamp(3rem, 13vw, 4.2rem); }
   .graph-heading > div:first-child { display: block; }
