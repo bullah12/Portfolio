@@ -1,3 +1,7 @@
+import "server-only";
+
+import { readFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
 import { profile } from "../content/profile";
 
 export const projectStatuses = [
@@ -54,26 +58,21 @@ export type Experience = {
   workstreams: Array<{ title: string; details: string[] }>;
 };
 
-declare global {
-  interface ImportMeta {
-    glob: <T = unknown>(
-      pattern: string,
-      options: { eager: true; query: string; import: string },
-    ) => Record<string, T>;
-  }
+function discoverMdx(directory: "projects" | "experience") {
+  const contentDirectory = join(process.cwd(), "content", directory);
+  return Object.fromEntries(
+    readdirSync(contentDirectory)
+      .filter((file) => file.endsWith(".mdx"))
+      .sort()
+      .map((file) => {
+        const path = join(contentDirectory, file);
+        return [`content/${directory}/${file}`, readFileSync(path, "utf8")];
+      }),
+  );
 }
 
-const projectFiles = import.meta.glob<string>("../content/projects/*.mdx", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
-
-const experienceFiles = import.meta.glob<string>("../content/experience/*.mdx", {
-  eager: true,
-  query: "?raw",
-  import: "default",
-});
+const projectFiles = discoverMdx("projects");
+const experienceFiles = discoverMdx("experience");
 
 function parseValue(value: string): unknown {
   const trimmed = value.trim();
