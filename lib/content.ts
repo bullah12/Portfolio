@@ -1,7 +1,9 @@
 import "server-only";
 
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import {
+  experienceFiles,
+  projectFiles,
+} from "../content/generated";
 import { profile } from "../content/profile";
 
 export const projectStatuses = [
@@ -57,22 +59,6 @@ export type Experience = {
   body: string;
   workstreams: Array<{ title: string; details: string[] }>;
 };
-
-function discoverMdx(directory: "projects" | "experience") {
-  const contentDirectory = join(process.cwd(), "content", directory);
-  return Object.fromEntries(
-    readdirSync(contentDirectory)
-      .filter((file) => file.endsWith(".mdx"))
-      .sort()
-      .map((file) => {
-        const path = join(contentDirectory, file);
-        return [`content/${directory}/${file}`, readFileSync(path, "utf8")];
-      }),
-  );
-}
-
-const projectFiles = discoverMdx("projects");
-const experienceFiles = discoverMdx("experience");
 
 function parseValue(value: string): unknown {
   const trimmed = value.trim();

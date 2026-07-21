@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
@@ -25,7 +27,16 @@ function frontmatter(source) {
 async function render(path = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+  const originalCwd = process.cwd();
+  const isolatedCwd = await mkdtemp(join(tmpdir(), "portfolio-worker-"));
+  let worker;
+  try {
+    process.chdir(isolatedCwd);
+    ({ default: worker } = await import(workerUrl.href));
+  } finally {
+    process.chdir(originalCwd);
+    await rm(isolatedCwd, { recursive: true, force: true });
+  }
   return worker.fetch(
     new Request(`http://localhost${path}`, { headers: { accept: "text/html", host: "localhost" } }),
     { ASSETS: { fetch: async () => new Response("Not found", { status: 404 }) } },
