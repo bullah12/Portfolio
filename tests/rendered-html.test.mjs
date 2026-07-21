@@ -93,6 +93,15 @@ test("publishes only the requested projects in the requested order", async () =>
   }
   visible.sort((a, b) => a.sortOrder - b.sortOrder);
   assert.ok(visible.every((project) => project.liveUrl), "Every published project should have a live URL");
+  assert.deepEqual(Object.fromEntries(visible.map((project) => [project.slug, project.liveUrl])), {
+    "world-cup-fantasy": "https://world-cup-fantasy.abdullah-zulfiqar.workers.dev/",
+    "property-management-dashboard": "https://property-manager-seven-mu.vercel.app/",
+    "ascent-ledger": "https://ascent-ledger-delta.vercel.app/",
+    "wholesale-traders": "https://wholesale-traders.vercel.app/",
+    "hr-portal": "https://hr-portal-psi-blond.vercel.app/",
+    "london-property-deal-finder": "https://londonhouses.streamlit.app/",
+    openguessr: "https://openguess.pages.dev/",
+  });
   assert.deepEqual(visible.map((project) => project.slug), [
     "world-cup-fantasy",
     "property-management-dashboard",
@@ -113,6 +122,20 @@ test("removes starter preview code and dead-link placeholders", async () => {
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   const page = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   assert.doesNotMatch(page, /href=["']#["']/);
+});
+
+test("offers secure live-product actions directly from project cards", async () => {
+  const [home, library] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../components/ProjectLibrary.tsx", import.meta.url), "utf8"),
+  ]);
+  for (const source of [home, library]) {
+    assert.match(source, /View Live Product ↗/);
+    assert.match(source, /View Case Study →/);
+    assert.match(source, /target="_blank"/);
+    assert.match(source, /rel="noopener noreferrer"/);
+    assert.match(source, /project\.liveUrl\s*\?/);
+  }
 });
 
 test("renders a statically discovered project route", async () => {

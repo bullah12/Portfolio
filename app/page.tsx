@@ -114,7 +114,16 @@ export default function Home() {
                   <p>{project.summary}</p>
                   <div className="featured-reveal">
                     <span>{project.categories.join(" · ")}</span>
-                    <Link href={`/projects/${project.slug}`}>case study ↗</Link>
+                  </div>
+                  <div className="project-card-actions">
+                    {project.liveUrl ? (
+                      <a className="project-live-button" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        View Live Product ↗
+                      </a>
+                    ) : null}
+                    <Link className="project-case-link" href={`/projects/${project.slug}`}>
+                      View Case Study →
+                    </Link>
                   </div>
                 </div>
               </article>

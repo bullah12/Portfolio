@@ -6,7 +6,7 @@ import type { Project, ProjectCategory } from "../lib/content";
 
 type ProjectSummary = Pick<
   Project,
-  "title" | "slug" | "year" | "status" | "visibility" | "summary" | "categories" | "accent"
+  "title" | "slug" | "year" | "status" | "visibility" | "summary" | "categories" | "accent" | "liveUrl"
 >;
 
 const filterLabels: Record<"all" | ProjectCategory, string> = {
@@ -62,11 +62,20 @@ export function ProjectLibrary({ projects, compact = false }: { projects: Projec
                 </p>
                 <h3><Link href={`/projects/${project.slug}`}>{project.title}</Link></h3>
                 <p>{project.summary}</p>
+                <div className="project-card-actions project-row-actions">
+                  {project.liveUrl ? (
+                    <a className="project-live-button" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      View Live Product ↗
+                    </a>
+                  ) : null}
+                  <Link className="project-case-link" href={`/projects/${project.slug}`}>
+                    View Case Study →
+                  </Link>
+                </div>
               </div>
               <div className="project-categories" aria-label={`Categories: ${project.categories.join(", ")}`}>
                 {project.categories.map((category) => <span key={category}>{category}</span>)}
               </div>
-              <Link className="row-arrow" href={`/projects/${project.slug}`} aria-label={`Read ${project.title} case study`}>↗</Link>
             </article>
           ))}
         </div>
