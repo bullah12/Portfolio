@@ -1,0 +1,30 @@
+---
+title: "Wholesale Traders"
+slug: "wholesale-traders"
+year: 2026
+status: "prototype"
+visibility: "public"
+sortOrder: 7
+summary: "A B2B wholesale storefront built around case, crate and pallet buying rather than retail assumptions."
+problem: "A retail basket model hides the information a trade buyer needs: case quantities, VAT, minimums, increments, volume breaks and rapid repeat ordering."
+solution: "I designed the catalogue and order flow around wholesale units, a validated bulk order pad and reusable reorder lists, with a browser-side catalogue admin for prototyping."
+outcome: "The current build is a static React SPA with client-side persistence and mock trade account and checkout flows—not a production commerce backend."
+highlights: ["Case/unit pricing with ex-VAT and inc-VAT views", "Volume breaks, MOQ, increments and pallet shortcuts", "Bulk order pad with SKU autocomplete and validation", "Saved lists, reorder flows and mock credit terms", "CSV/Excel import preview, validation and round-trip export"]
+stack: ["React", "Vite", "React Router", "JavaScript", "CSS", "SheetJS", "localStorage", "Vercel"]
+categories: ["commerce", "web"]
+repoUrl: "https://github.com/bullah12/wholesale-traders"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#c68a4a"
+---
+
+## Key decisions
+
+Wholesale language is embedded in the interaction model: users can compare tax treatments, respect order increments and jump to pallet quantities without translating from a consumer storefront.
+
+The catalogue admin validates imports before committing browser-side data and can export it again, making the prototype useful for shaping a real back-office workflow without pretending localStorage is a production database.
+
+## Architecture
+
+The product is intentionally a static React SPA. Account terms, checkout and persistence are mock or browser-local flows that make the buying model testable before a secure commerce backend is introduced.

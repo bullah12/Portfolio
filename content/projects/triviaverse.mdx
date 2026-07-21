@@ -1,0 +1,28 @@
+---
+title: "TriviaVerse"
+slug: "triviaverse"
+year: 2026
+status: "prototype"
+visibility: "private"
+sortOrder: 9
+summary: "A dark-mode-first social trivia product exploring live hosted games, couch play, competitive ladders, daily streaks and user-created content."
+problem: "Social trivia needs to make several very different modes—quick daily play, local groups and synchronised remote rooms—feel like one coherent product."
+solution: "I created an Expo interface foundation for home, versus and host-online flows, alongside documented Supabase contracts for realtime game state and progression."
+outcome: "This is an interface-first prototype. Backend rooms, progression and leaderboard capabilities are being wired up and are not presented as complete."
+highlights: ["Expo and React Native application scaffold", "UI foundations for home, 1v1 lobby and hosted online play", "Documented room and realtime-play contracts", "Profile, progression and leaderboard data foundations", "Clear separation between designed flows and unfinished backend work"]
+stack: ["Expo", "React Native", "TypeScript", "Supabase", "PostgreSQL", "Realtime"]
+categories: ["mobile", "games"]
+repoUrl: null
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#9276d4"
+---
+
+## Key decisions
+
+The interface establishes a common rhythm across different play modes before realtime complexity is introduced. That makes the product language testable without presenting backend contracts as working multiplayer.
+
+## Architecture
+
+Expo and React Native provide the mobile foundation. Supabase schemas and contracts describe future room state, shared rounds, profiles, progression and leaderboards while implementation continues.

@@ -1,0 +1,31 @@
+---
+title: "Ascent Ledger"
+slug: "ascent-ledger"
+year: 2026
+status: "in-progress"
+visibility: "public"
+featuredRank: 4
+sortOrder: 4
+summary: "A private-by-default climbing logbook, BMG progress tracker, open-route catalogue and preference-driven recommendation engine."
+problem: "Climbers need one place to record private progress, discover routes and understand gaps against a structured goal—without losing provenance or giving up control of their location history."
+solution: "I combined private climb logging, explainable BMG gap recommendations and a geospatial route catalogue with explicit sharing controls and source-aware imports."
+outcome: "The core logbook, recommendation model, route ingestion and mapping toolchain are under active development with CI, tests and data maintenance tooling in place."
+highlights: ["Private climbs by default with explicit per-climb public opt-in", "BMG gap analysis plus a separate preference-driven “For you” ranker", "GPX/KML ingestion and route geometry", "MapLibre/Terra Draw editor with trail following and off-trail fallback", "Licensed route imports retaining source IDs, licences and attribution"]
+stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "Supabase", "MapLibre", "OpenRouteService", "Vitest"]
+categories: ["web", "data", "mapping"]
+repoUrl: "https://github.com/bullah12/ascent-ledger"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#8dba68"
+---
+
+## Key decisions
+
+Privacy is a data-model rule, not a settings afterthought. Climbs begin private, public visibility is explicit and anonymous projections expose only the fields a public route experience needs.
+
+Recommendations are split into two understandable jobs: goal-gap suggestions for BMG progression, and a preference ranker for personal discovery. Route imports retain licence and attribution information instead of erasing provenance during normalisation.
+
+## Architecture
+
+The App Router product uses Prisma and Postgres beneath Supabase Auth and Row Level Security. Geospatial editing combines MapLibre and Terra Draw, with OpenRouteService used for bounded trail following and a safe manual fallback.

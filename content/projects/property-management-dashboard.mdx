@@ -1,0 +1,32 @@
+---
+title: "Property Management Dashboard"
+shortTitle: "Property Manager"
+slug: "property-management-dashboard"
+year: 2026
+status: "in-progress"
+visibility: "public"
+featuredRank: 5
+sortOrder: 5
+summary: "A private workspace for landlords and property teams covering tenancies, documents, finances, compliance, ownership and investment performance."
+problem: "Property operations combine sensitive tenancy records, deadlines, documents, ownership changes and distinct accounting flows that cannot safely share a loosely scoped data model."
+solution: "I designed portfolio isolation throughout the application, backed by immutable ownership events, explicit accounting treatments and tested operational workflows."
+outcome: "The workspace covers the core property lifecycle and is being expanded with background jobs, reporting and deeper operational testing."
+highlights: ["Account, portfolio and workspace isolation throughout the model", "Lease upload plus generated contract PDFs", "Income, expenses, deadlines, contractors, notifications and jobs", "Effective-dated ownership ledger with reversals instead of destructive edits", "Separate treatment for private payments and fund capital/distributions"]
+stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL", "Supabase", "TanStack Query", "TanStack Table", "Recharts", "Zod"]
+categories: ["web", "data"]
+repoUrl: "https://github.com/bullah12/property-manager"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#70a5a0"
+---
+
+## Key decisions
+
+Workspace isolation is enforced as a cross-cutting rule and covered in tests, rather than applied inconsistently at the page layer. Ownership is represented as an effective-dated event ledger, so corrections reverse or supersede history instead of erasing it.
+
+Private ownership payments and property-fund capital flows use separate accounting treatments. That distinction keeps investment performance legible as the domain grows.
+
+## Architecture
+
+Next.js and Prisma sit over PostgreSQL and Supabase. TanStack tools support dense, interactive operations, while focused tests cover isolation, ownership, leases, income and portfolio performance.
