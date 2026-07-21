@@ -92,6 +92,7 @@ test("publishes only the requested projects in the requested order", async () =>
     if (data.portfolio !== false) visible.push(data);
   }
   visible.sort((a, b) => a.sortOrder - b.sortOrder);
+  assert.ok(visible.every((project) => project.liveUrl), "Every published project should have a live URL");
   assert.deepEqual(visible.map((project) => project.slug), [
     "world-cup-fantasy",
     "property-management-dashboard",
