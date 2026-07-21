@@ -4,7 +4,6 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-const root = new URL("../", import.meta.url);
 const statuses = new Set(["live", "built", "prototype", "in-progress"]);
 const categories = new Set(["data", "web", "mobile", "games", "mapping", "commerce", "automation"]);
 
@@ -52,9 +51,9 @@ test("server-renders the finished portfolio", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /Abdullah Taj/);
-  assert.match(html, /I turn messy data and practical problems/);
+  assert.match(html, /I build the data platforms that/);
   assert.match(html, /Fantasy World Cup 2026/);
-  assert.match(html, /Professional experience/);
+  assert.match(html, /production data engineering/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape|react-loading-skeleton/i);
   assert.doesNotMatch(html, /href=["']#["']/i);
 });
@@ -144,4 +143,35 @@ test("renders a statically discovered project route", async () => {
   const html = await response.text();
   assert.match(html, /Full 104-match tournament schedule/);
   assert.match(html, /View source/);
+});
+
+test("renders the anonymised Explore graph and primary navigation", async () => {
+  const [homeResponse, projectResponse, exploreResponse] = await Promise.all([
+    render(),
+    render("/projects"),
+    render("/explore?node=energy-network"),
+  ]);
+  for (const response of [homeResponse, projectResponse, exploreResponse]) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /href=["']\/explore["']/);
+  }
+
+  const response = await render("/explore");
+  const html = await response.text();
+  assert.equal(response.status, 200);
+  assert.match(html, /Energy infrastructure/);
+  assert.match(html, /Aviation/);
+  assert.match(html, /Business data and identity/);
+  assert.match(html, /Large enterprise \/ regulated network operator/);
+  assert.match(html, /Text relationship summary/);
+  assert.match(html, /Reset view/);
+
+  const experienceDirectory = new URL("../content/experience/", import.meta.url);
+  const graphSource = await readFile(new URL("../app/explore/graph-data.ts", import.meta.url), "utf8");
+  for (const file of (await readdir(experienceDirectory)).filter((name) => name.endsWith(".mdx"))) {
+    const client = frontmatter(await readFile(new URL(file, experienceDirectory), "utf8")).client;
+    assert.ok(!html.includes(client), "Explore HTML must not reveal a client company name");
+    assert.ok(!graphSource.includes(client), "Explore graph data must not reveal a client company name");
+  }
 });

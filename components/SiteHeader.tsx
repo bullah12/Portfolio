@@ -7,7 +7,10 @@ export function SiteHeader() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
-    setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+    const frame = window.requestAnimationFrame(() => {
+      setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   function toggleTheme() {
@@ -30,6 +33,7 @@ export function SiteHeader() {
         <Link href="/#work">work</Link>
         <Link href="/#builds">builds</Link>
         <Link href="/#skills">stack</Link>
+        <Link href="/explore">explore</Link>
         <Link className="nav-contact" href="/#contact">contact</Link>
         <button className="theme-toggle" type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}>
           <span aria-hidden="true" />{theme}

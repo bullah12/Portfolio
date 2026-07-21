@@ -82,7 +82,7 @@ export default function Home() {
 
         <section className="work-section section-shell" id="work" aria-labelledby="work-title">
           <div className="terminal-heading">
-            <p className="eyebrow" id="work-title">// production data engineering</p>
+            <p className="eyebrow" id="work-title">{"// production data engineering"}</p>
             <span>01 / client delivery</span>
           </div>
           <div className="work-grid">
@@ -99,7 +99,7 @@ export default function Home() {
 
         <section className="featured section-shell" id="builds" aria-labelledby="builds-title">
           <div className="terminal-heading">
-            <p className="eyebrow" id="builds-title">// selected builds</p>
+            <p className="eyebrow" id="builds-title">{"// selected builds"}</p>
             <Link href="/projects">{String(projects.length).padStart(2, "0")} shipped →</Link>
           </div>
           <div className="featured-grid">
@@ -136,7 +136,7 @@ export default function Home() {
 
         <section className="capabilities section-shell" id="skills" aria-labelledby="skills-title">
           <div className="terminal-heading">
-            <p className="eyebrow" id="skills-title">// the stack</p>
+            <p className="eyebrow" id="skills-title">{"// the stack"}</p>
             <span>03 / tools that ship</span>
           </div>
           <div className="capability-list">
@@ -150,7 +150,7 @@ export default function Home() {
         </section>
 
         <section className="about section-shell" id="about" aria-labelledby="about-title">
-          <p className="eyebrow">// about the engineer</p>
+          <p className="eyebrow">{"// about the engineer"}</p>
           <div className="about-copy">
             <h2 id="about-title">Systems thinking,<br /><em>product energy.</em></h2>
             <p className="about-lede">
