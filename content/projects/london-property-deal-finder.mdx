@@ -1,0 +1,31 @@
+---
+title: "London Property Deal Finder"
+slug: "london-property-deal-finder"
+year: 2026
+status: "in-progress"
+visibility: "private"
+featuredRank: 3
+sortOrder: 3
+summary: "A Streamlit property-intelligence dashboard that gathers London sale and auction listings and surfaces potential value-add opportunities."
+problem: "Potential deals are scattered across portals and auction sites, each with different pagination, freshness signals and rendering behaviour. Manual review makes it difficult to spot relevant listings early."
+solution: "I built source-aware ingestion adapters, listing-identity upserts and a protected Streamlit search experience focused on selected postcodes and value-add language."
+outcome: "Built across 2025–2026, the system supports scheduled refreshes, recent/all listing views and safe re-ingestion controls while additional sources are refined."
+highlights: ["Signals for probate, auction, modernisation and cash-buyer language", "Full-availability and three-day Rightmove ingestion modes", "Multi-source adapters with pagination and browser-rendering fallback", "Date-aware Streamlit filters, source search and sorting", "Scheduled Actions refresh with same-day skip and forced re-ingestion controls"]
+stack: ["Python", "Streamlit", "Pandas", "Requests", "Beautiful Soup", "Selenium", "Supabase", "GitHub Actions"]
+categories: ["data", "automation", "web"]
+repoUrl: null
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#d6a45f"
+---
+
+## Key decisions
+
+Every ingestion adapter preserves source identity and freshness timestamps. Upserts use listing identity so repeat runs update a property rather than creating an increasingly noisy duplicate trail.
+
+Browser rendering is a fallback, not the default: direct requests remain the faster path wherever a source permits them. Same-day skip and force controls make scheduled automation safer to operate and easier to investigate.
+
+## Architecture
+
+Python adapters normalise incoming listings before Supabase persistence. Streamlit provides focused review surfaces for recent and complete inventories, protected by a password while the product remains private.

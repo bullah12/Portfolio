@@ -1,0 +1,31 @@
+---
+title: "OTIUM E-commerce Template"
+shortTitle: "OTIUM"
+slug: "otium-ecommerce-template"
+year: 2026
+status: "prototype"
+visibility: "public"
+sortOrder: 10
+summary: "A responsive luxury storefront template built around a reusable editorial design system and a complete client-side shopping journey."
+problem: "A convincing commerce concept needs more than a polished home page: catalogue discovery, product decisions, basket state and post-purchase screens must share a consistent system."
+solution: "I built a thirty-product editorial storefront with URL-driven discovery, reusable design tokens and the full client-side journey from search to account and order views."
+outcome: "The template demonstrates a complete front-end experience; authentication, checkout, orders and addresses are mocks with no payment or production backend integration."
+highlights: ["Thirty products across five collections", "URL-driven search, sort, collection, price and stock filters", "Product, cart, wishlist, checkout and confirmation journeys", "Mock account, orders and addresses plus supporting content pages", "Reusable Fraunces/Inter tokens, components and accessible micro-animation"]
+stack: ["React", "Vite", "React Router", "JavaScript", "CSS", "React Context", "Vercel"]
+categories: ["commerce", "web"]
+repoUrl: "https://github.com/bullah12/Ecommerce-template"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#b88967"
+---
+
+## Key decisions
+
+Filter state lives in the URL so the catalogue is shareable and browser navigation remains useful. The visual system treats type, spacing and motion as reusable primitives rather than page-specific decoration.
+
+The complete shopping journey is deliberately marked as client-side. It is a product and design-system template, not a claim that payments, identity or order fulfilment are connected.
+
+## Architecture
+
+A static React application uses Context for local shopping state and React Router for catalogue and content journeys. It is deployable as a front-end template without a server dependency.

@@ -1,0 +1,31 @@
+---
+title: "OpenGuessr"
+slug: "openguessr"
+year: 2026
+status: "in-progress"
+visibility: "private"
+featuredRank: 2
+sortOrder: 2
+summary: "A browser geography game that drops the player into a random Street View panorama and scores their guess on a world map."
+problem: "Random panorama games are deceptively difficult: locations need viable coverage, the map interaction must work on a small screen and shared rounds require dependable realtime state."
+solution: "I designed a responsive solo game around Street View and Google Maps, with region sampling, known-coverage fallbacks and a Supabase model ready for rooms, players, rounds and guesses."
+outcome: "Solo rounds, distance feedback and the core responsive game are working; friends and online multiplayer are still being completed."
+highlights: ["Solo rounds with distance-based scoring and feedback", "Broad-region sampling with known-coverage fallbacks", "Mobile guess-map toggle and accessible menus", "Runtime configuration keeps API values out of source", "Realtime schema foundations for rooms, players, guesses and countdowns"]
+stack: ["JavaScript", "Google Maps JavaScript API", "Street View", "Supabase", "PostgreSQL", "Realtime", "Cloudflare Pages"]
+categories: ["games", "mapping", "web"]
+repoUrl: null
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#75b8b1"
+---
+
+## Key decisions
+
+Coverage is treated as product logic rather than luck. The location sampler works across broad regions, then falls back to known viable locations when Street View cannot produce a usable panorama.
+
+The mobile design gives the panorama visual priority and reveals the guess map on demand. Keyboard-reachable menus and clear round states make the same flow usable beyond pointer-first desktop play.
+
+## Architecture
+
+The current product is a browser client backed by runtime configuration. Supabase contracts establish the room and round state needed for multiplayer, but online play is deliberately presented as in progress rather than finished.

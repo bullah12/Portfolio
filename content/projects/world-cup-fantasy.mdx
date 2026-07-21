@@ -1,0 +1,32 @@
+---
+title: "Fantasy World Cup 2026"
+shortTitle: "World Cup Fantasy"
+slug: "world-cup-fantasy"
+year: 2026
+status: "built"
+visibility: "public"
+featuredRank: 1
+sortOrder: 1
+summary: "A shared fantasy prediction app for the 2026 World Cup, spanning score picks, configurable locking, standings, history and automated result updates."
+problem: "A private prediction league needs more than a fixture list: picks must stay in sync across devices, lock fairly, score consistently and react to a changing 104-match tournament."
+solution: "I built a browser app on Supabase with autosaved predictions, a protected scoring admin and a Cloudflare Worker that converts ESPN scoreboard changes into realtime standings updates."
+outcome: "The full tournament product is built, including group and knockout prediction flows, player form, history and configurable scoring."
+highlights: ["Full 104-match tournament schedule with shared, multi-device predictions", "Autosave, prediction locking and knockout penalty-winner picks", "Leaderboard, player history and five-match form", "Supabase Auth-protected results and scoring administration", "Server-side Worker polling, team mapping and changed-result upserts"]
+stack: ["JavaScript", "HTML/CSS", "Supabase", "PostgreSQL", "Realtime", "Cloudflare Workers", "ESPN scoreboard integration"]
+categories: ["games", "web", "data", "automation"]
+repoUrl: "https://github.com/bullah12/world-cup-fantasy"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#35d07f"
+---
+
+## Key decisions
+
+Service-role credentials remain on the Worker, while the browser receives only the permissions it needs. Result polling maps external team identities before upserting only changed matches, allowing Supabase Realtime to refresh the table without noisy writes.
+
+The prediction model covers both group-stage scores and knockout-specific penalty winners. Locking and scoring stay configurable so the same core flow can handle different league rules without a rewrite.
+
+## Architecture
+
+The browser owns the fast prediction experience. Supabase provides Postgres, authentication and realtime updates. A Cloudflare Worker is the narrow automation boundary between the external scoreboard feed and the application database.

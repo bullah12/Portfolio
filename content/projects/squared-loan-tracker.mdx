@@ -1,0 +1,32 @@
+---
+title: "Squared — Loan & IOU Tracker"
+shortTitle: "Squared"
+slug: "squared-loan-tracker"
+year: 2026
+status: "prototype"
+visibility: "public"
+featuredRank: 6
+sortOrder: 6
+summary: "An offline-first Android app for recording informal loans and IOUs in seconds, with balances derived from immutable transaction history."
+problem: "Informal debts are easy to forget and awkward to reconcile. Storing an editable total creates drift, while requiring an account or connection makes quick capture less dependable."
+solution: "I built a local-first Compose app whose contact balances are calculated from transactions, with optional read-only Firebase sharing layered on top."
+outcome: "The prototype supports the full local record flow plus revocable share links, without making cloud services a dependency for everyday use."
+highlights: ["Contact balances derived live from immutable transactions", "Quick add/edit, settle-up, activity, undo, archive and tags", "Home-screen widget and quick-settings tile", "Optional live read-only ledger snapshots through Firebase", "Recipients can confirm or dispute without changing the source ledger"]
+stack: ["Kotlin", "Jetpack Compose", "Material 3", "Room", "Hilt", "MVVM", "StateFlow", "Firebase", "Firestore"]
+categories: ["mobile", "data"]
+repoUrl: "https://github.com/bullah12/loan-tracker"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#ef785f"
+---
+
+## Key decisions
+
+The balance is never a second source of truth. It is derived from a contact’s transaction stream, preventing an edited total from drifting away from the activity that created it.
+
+Sharing is an optional projection of the local ledger. Recipients receive a read-only view and can confirm or dispute entries; revocation removes the cloud snapshot while leaving the local app untouched.
+
+## Architecture
+
+Room is the durable local store behind a Compose UI, with Hilt, MVVM and StateFlow keeping updates predictable. Firebase is isolated to optional sharing rather than required for core app behaviour.

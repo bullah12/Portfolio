@@ -1,0 +1,30 @@
+---
+title: "HR Portal"
+slug: "hr-portal"
+year: 2026
+status: "prototype"
+visibility: "public"
+sortOrder: 8
+summary: "An internal recruitment-to-onboarding platform with deterministic ATS scoring, human decision gates, GDPR consent tracking and an append-only audit trail."
+problem: "Hiring workflows cross sensitive documents, competing staff permissions, approvals and candidate-facing links. An opaque score or automatic stage change can create risk rather than remove work."
+solution: "I built a role-aware workflow where scoring is explainable and stage changes remain human-controlled, with tokenised candidate journeys and immutable audit records."
+outcome: "The prototype covers the recruitment-to-onboarding flow with local integration fallbacks; third-party providers are not presented as production-verified."
+highlights: ["Requisitions, applications, CV parsing, interviews and scorecards", "Sequential offer approvals, PDFs, signing flow and onboarding checklists", "Six staff roles plus tokenised candidate, offer and onboarding links", "Weighted scoring with must-have caps and human-controlled stages", "JWT cookie auth, RBAC, validation and append-only audit records"]
+stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "JWT", "Zod", "PDF/DOCX parsing"]
+categories: ["web", "data", "automation"]
+repoUrl: "https://github.com/bullah12/HR-portal"
+liveUrl: null
+cover: null
+screenshots: []
+accent: "#a777b6"
+---
+
+## Key decisions
+
+Scoring is deterministic and inspectable: must-have skills, useful extras, experience and eligibility contribute to a weighted result, while missing essentials cap that result. People—not an algorithm—control stage changes.
+
+Candidates use narrow tokenised links rather than receiving internal staff accounts. Provider integrations retain local fallback modes, so unfinished connections are never hidden behind a false production claim.
+
+## Architecture
+
+App Router APIs validate inputs before PostgreSQL persistence through Prisma. JWT cookie authentication, role middleware and append-only auditing form the security boundary around the workflow.
