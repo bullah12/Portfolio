@@ -3,7 +3,7 @@ export const profile = {
   role: "Data Engineer & Product Builder",
   supportingRole: "Senior Consultant",
   location: "United Kingdom",
-  email: "hello@abdullah-taj.dev" as string | null,
+  email: "abdullah_zulfiqar@hotmail.co.uk" as string | null,
   availability: "Available for senior data enquiries" as string | null,
   github: "https://github.com/bullah12",
   linkedin: null as string | null,
